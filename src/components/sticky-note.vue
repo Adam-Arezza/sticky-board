@@ -1,14 +1,14 @@
 <template>
-  <div id="note" @dblclick="menu = !menu">
+  <div ref="note" id="note" @dblclick="menu = !menu">
     <p>{{task}}</p>
     <p id="owner" v-if="owner">{{owner}}</p>
     <div id="menu" v-if="menu">
-        <div v-if="!owner">
+      <div v-if="!owner">
         <button @click="assign">Sign</button>
         <input v-model="newOwn" type="text" placeholder="assign to">
       </div>
-      <b-button @click="deleteNote" size="sm">Delete sticky</b-button>
-      <b-button @click="moveNote" size="md">></b-button>
+      <b-button class="noteBtn" @click="deleteNote" size="sm">Delete sticky</b-button>
+      <b-button class="noteBtn" @click="moveNote" size="md">></b-button>
     </div>
   </div>
 </template>
@@ -17,25 +17,31 @@
 export default {
   props: {
     task: String,
-    owner: String
+    owner: String,
+    colour: String
   },
   data() {
     return {
       menu: false,
       assigned: false,
-      newOwn: ''
+      newOwn: ""
     };
   },
   methods: {
-      deleteNote(){
-          this.$emit('deleteNote')
-      },
-      moveNote(){
-          this.$emit('moveNote')
-      },
-      assign(){
-          this.$emit('assign', [this.newOwn, this.task])
-      }
+    deleteNote() {
+      this.$emit("deleteNote");
+    },
+    moveNote() {
+      this.$emit("moveNote");
+    },
+    assign() {
+      this.$emit("assign", [this.newOwn, this.task]);
+    }
+  },
+  mounted() {
+    if (this.colour) {
+      this.$refs.note.style.background = this.colour;
+    }
   }
 };
 </script>
@@ -47,7 +53,6 @@ export default {
   max-height: 250px;
   min-height: 50px;
   margin: 15px;
-
   box-shadow: 4px 4px 2px grey;
   text-align: left;
 }
@@ -62,5 +67,8 @@ p {
 }
 #message {
   padding: 10px;
+}
+.noteBtn {
+  margin: 10px;
 }
 </style>
