@@ -1,74 +1,43 @@
 <template>
-  <div ref="note" id="note" @dblclick="menu = !menu">
-    <p>{{task}}</p>
-    <p id="owner" v-if="owner">{{owner}}</p>
-    <div id="menu" v-if="menu">
-      <div v-if="!owner">
-        <button @click="assign">Sign</button>
-        <input v-model="newOwn" type="text" placeholder="assign to">
-      </div>
-      <b-button class="noteBtn" @click="deleteNote" size="sm">Delete sticky</b-button>
-      <b-button class="noteBtn" @click="moveNote" size="md">></b-button>
-    </div>
+  <div
+    v-bind:id="note.stickyId"
+    class="note"
+    draggable="true"
+    @dragstart="startDrag"
+    @dragover.stop
+  >
+    <p>{{note.content}}</p>
+    <p>created by: {{note.createdBy}}</p>
+    <button @click="deleteNote(note.stickyId)">Delete</button>
+    <p>create date: {{note.date}}</p>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    task: String,
-    owner: String,
-    colour: String
-  },
-  data() {
-    return {
-      menu: false,
-      assigned: false,
-      newOwn: ""
-    };
+    note: Object
   },
   methods: {
-    deleteNote() {
-      this.$emit("deleteNote");
+    startDrag(e) {
+      e.dataTransfer.setData("sticky", JSON.stringify(this.note));
     },
-    moveNote() {
-      this.$emit("moveNote");
-    },
-    assign() {
-      this.$emit("assign", [this.newOwn, this.task]);
-    }
-  },
-  mounted() {
-    if (this.colour) {
-      this.$refs.note.style.background = this.colour;
+    deleteNote(id) {
+      this.$emit("delete", id);
     }
   }
 };
 </script>
 
 <style>
-#note {
+.note {
   background: lightgoldenrodyellow;
-  max-width: 250px;
-  max-height: 250px;
-  min-height: 50px;
+  min-width: 50%;
+  max-width: 70%;
+  max-height: 300px;
+  min-height: 10%;
   margin: 15px;
   box-shadow: 4px 4px 2px grey;
   text-align: left;
-}
-p {
-  padding: 10px;
-}
-#menu {
-  padding: 10px;
-}
-#owner {
-  font-size: 12px;
-}
-#message {
-  padding: 10px;
-}
-.noteBtn {
-  margin: 10px;
 }
 </style>
