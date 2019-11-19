@@ -9,7 +9,10 @@
     <p>{{note.content}}</p>
     <p>created by: {{note.createdBy}}</p>
     <button @click="deleteNote(note.stickyId)">Delete</button>
-    <p>create date: {{note.date}}</p>
+    <p class="date">
+      <strong>Created date:</strong>
+      {{note.date}}
+    </p>
   </div>
 </template>
 
@@ -39,5 +42,9 @@ export default {
   margin: 15px;
   box-shadow: 4px 4px 2px grey;
   text-align: left;
+  padding: 10px;
+}
+.date {
+  font-size: 0.75em;
 }
 </style>

@@ -26,10 +26,10 @@ export default {
   },
   methods: {
     dropItem(e) {
-      let data = e.dataTransfer.getData("sticky")
+      let data = e.dataTransfer.getData("sticky");
       if (e.target.className == "column") {
         e.target.style.background = "white";
-        this.$emit('transfer', data, this.name)
+        this.$emit("transfer", data, this.name);
       }
     },
     dragOn(e) {
@@ -58,7 +58,7 @@ export default {
   width: 33%;
   margin: 15px;
   border: grey solid 2px;
-  min-height: 600px;
+  min-height: 580px;
   text-align: center;
   border-radius: 15px;
   align-items: center;
