@@ -55,12 +55,39 @@ export default {
 .column {
   display: flex;
   flex-direction: column;
-  width: 33%;
+  width: 30%;
   margin: 15px;
   border: grey solid 2px;
-  min-height: 580px;
+  height: 580px;
   text-align: center;
   border-radius: 15px;
   align-items: center;
+  overflow-y: scroll;
+  background: white;
+}
+/* width */
+.column::-webkit-scrollbar {
+  width: 15px;
+  border-radius: 15px;
+}
+
+/* Track */
+.column::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 15px;
+  max-height: 30px;
+  display: none;
+}
+
+/* Handle */
+.column::-webkit-scrollbar-thumb {
+  background: rgb(32, 32, 32);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.column::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  width: 15px;
 }
 </style>

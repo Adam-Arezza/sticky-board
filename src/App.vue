@@ -43,4 +43,8 @@ export default {
 body {
   margin: 0px;
 }
+#app {
+  background: rgb(200,200,200);
+  font-family: Arial, Helvetica, sans-serif;
+}
 </style>
