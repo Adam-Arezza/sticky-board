@@ -37,8 +37,8 @@ export default {
   background: lightgoldenrodyellow;
   min-width: 50%;
   max-width: 70%;
-  max-height: 300px;
-  min-height: 10%;
+  /* max-height: 300px;
+  min-height: 10%; */
   margin: 15px;
   box-shadow: 4px 4px 2px grey;
   text-align: left;
