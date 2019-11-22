@@ -5,8 +5,11 @@
       <button class="createBtn" @click="createSticky">Create</button>
     </div>
     <div class="details">
-      <input class="detail" placeholder="created by" v-model="created" />
-      <input class="detail" type="date" />
+      <!-- <input class="detail" placeholder="created by" v-model="created" /> -->
+      <div>
+        <label for="due=date">Due:</label>
+        <input id="due-date" class="detail" type="date" v-model="dueDate" />
+      </div>
       <Progress v-bind:stickies="stickies" v-bind:columns="columns"></Progress>
     </div>
   </div>
@@ -20,18 +23,19 @@ export default {
   data() {
     return {
       task: "",
-      created: ""
+      dueDate: undefined
     };
   },
   methods: {
     createSticky() {
-      if (!this.created) {
-        return alert("please input the task creator");
+      if (!this.dueDate) {
+        return alert("please input the task due date");
       }
       let date = new Date();
-      this.$emit("createSticky", this.task, this.created, date);
+      this.$emit("createSticky", this.task, date, this.dueDate);
       this.task = "";
       this.created = "";
+      this.dueDate = undefined;
     }
   }
 };

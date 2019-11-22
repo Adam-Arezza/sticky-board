@@ -31,8 +31,7 @@ export default {
       return notes;
     },
     deleteNote(id) {
-      let note = this.stickies.findIndex(sticky => sticky.stickyId == id);
-      this.stickies.splice(note, 1);
+      this.$emit('delete', id)
     },
     transferSticky(data, col) {
       this.$emit('transfer', data, col)
@@ -47,5 +46,6 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
+  height: 75vh;
 }
 </style>

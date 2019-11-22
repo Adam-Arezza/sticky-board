@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <InputHeader v-on:createSticky="createSticky" v-bind:stickies="stickies" v-bind:columns="columns"></InputHeader>
-    <StickyBoard v-bind:stickies="stickies" v-bind:columns="columns" v-on:transfer="moveSticky"></StickyBoard>
+    <StickyBoard v-bind:stickies="stickies" v-bind:columns="columns" v-on:transfer="moveSticky" v-on:delete="deleteNote"></StickyBoard>
   </div>
 </template>
 
@@ -19,13 +19,13 @@ export default {
     };
   },
   methods: {
-    createSticky(content, created, date) {
+    createSticky(content, date, due) {
       this.stickies.push({
         stickyId: "S" + (this.count + 1),
         content: content,
         column: "Tasks",
-        createdBy: created,
-        date: date
+        date: date,
+        due: due
       });
       this.count++;
       this.saveStickies()
@@ -45,6 +45,11 @@ export default {
         let stickies = JSON.parse(localStorage.getItem("boardData"))
         this.stickies = stickies
       }
+    },
+    deleteNote(id) {
+      let note = this.stickies.findIndex(sticky => sticky.stickyId == id);
+      this.stickies.splice(note, 1);
+      this.saveStickies()
     }
   },
   created() {
@@ -58,6 +63,7 @@ body {
   margin: 0px;
 }
 #app {
+  min-height: 100vh;
   background: rgb(200,200,200);
   font-family: Arial, Helvetica, sans-serif;
 }
