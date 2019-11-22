@@ -28,13 +28,27 @@ export default {
         date: date
       });
       this.count++;
+      this.saveStickies()
     },
     moveSticky(data, col) {
       let noteObj = JSON.parse(data);
       let moveNote = this.stickies.find(s => s.stickyId == noteObj.stickyId);
       let newCol = col;
       moveNote.column = newCol;
+      this.saveStickies()
+    },
+    saveStickies() {
+      localStorage.setItem("boardData", JSON.stringify(this.stickies))
+    },
+    loadStickies() {
+      if(localStorage.getItem("boardData")) {
+        let stickies = JSON.parse(localStorage.getItem("boardData"))
+        this.stickies = stickies
+      }
     }
+  },
+  created() {
+    this.loadStickies()
   }
 };
 </script>
