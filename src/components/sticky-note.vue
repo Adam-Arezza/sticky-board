@@ -7,11 +7,14 @@
     @dragover.stop
   >
     <p>{{note.content}}</p>
-    <p>created by: {{note.createdBy}}</p>
     <button @click="deleteNote(note.stickyId)">Delete</button>
     <p class="date">
       <strong>Created date:</strong>
       {{note.date}}
+    </p>
+    <p class="date">
+      <strong>Due:</strong>
+      {{note.due}}
     </p>
   </div>
 </template>

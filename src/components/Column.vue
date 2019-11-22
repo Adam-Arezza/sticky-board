@@ -58,7 +58,6 @@ export default {
   width: 30%;
   margin: 15px;
   border: grey solid 2px;
-  height: 580px;
   text-align: center;
   border-radius: 15px;
   align-items: center;
