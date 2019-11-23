@@ -2,7 +2,7 @@
   <div class="inputs">
     <div>
       <textarea class="stickyInput" placeholder="Enter task" v-model="task" />
-      <button class="createBtn" @click="createSticky">Create</button>
+      <button class="actionBtn" @click="createSticky">Create</button>
     </div>
     <div class="details">
       <div>
@@ -11,7 +11,10 @@
       </div>
       <Progress v-bind:stickies="stickies" v-bind:columns="columns"></Progress>
     </div>
-    <button @click="backToBoards">Back to boards</button>
+    <button class="actionBtn" @click="backToBoards">Back to boards</button>
+    <div class="date" v-bind="currentDate">
+      {{currentDate}}
+    </div>
   </div>
 </template>
 
@@ -40,6 +43,11 @@ export default {
     backToBoards() {
       this.$emit("backToBoards")
     }
+  },
+  computed: {
+    currentDate() {
+      return new Date()
+    }
   }
 };
 </script>
@@ -48,23 +56,22 @@ export default {
 .inputs {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: flex-start;
-  padding: 5px;
+  padding: 15px;
 }
 .stickyInput {
-  max-height: 200px;
-  max-width: 300px;
-  min-height: 150px;
-  min-width: 150px;
+  min-width: 300px;
+  max-width: 400px;
+  min-height: 50px;
+  max-height: 175px;
 }
-.createBtn {
+.actionBtn {
   background: darkblue;
   color: white;
   border: none;
   font-size: 1.2em;
   display: block;
-  margin: 3px;
   border-radius: 5px;
 }
 .createBtn:hover {
@@ -80,5 +87,8 @@ export default {
   margin-left: 2px;
   margin-bottom: 3px;
   width: 150px;
+}
+.date {
+  font-size: 1em;
 }
 </style>
