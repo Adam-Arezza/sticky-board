@@ -5,13 +5,13 @@
       <button class="createBtn" @click="createSticky">Create</button>
     </div>
     <div class="details">
-      <!-- <input class="detail" placeholder="created by" v-model="created" /> -->
       <div>
         <label for="due=date">Due:</label>
         <input id="due-date" class="detail" type="date" v-model="dueDate" />
       </div>
       <Progress v-bind:stickies="stickies" v-bind:columns="columns"></Progress>
     </div>
+    <button @click="backToBoards">Back to boards</button>
   </div>
 </template>
 
@@ -36,6 +36,9 @@ export default {
       this.task = "";
       this.created = "";
       this.dueDate = undefined;
+    },
+    backToBoards() {
+      this.$emit("backToBoards")
     }
   }
 };
