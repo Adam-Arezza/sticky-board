@@ -1,21 +1,29 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, Tray, Menu, ipcMain, MenuItem } from 'electron'
 import {
   createProtocol,
   installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib'
+const path = require('path')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
+let iconPath
+let appIcon
+let notifications
 
+if (process.platform === "linux") {
+  console.log('it is linux')
+  iconPath = '/home/adam/Documents/sticky-board/src/assets/gear_icon.png'
+}
 // Standard scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], { secure: true })
-function createWindow () {
+function createWindow() {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600})
+  win = new BrowserWindow({ width: 800, height: 600 })
   // win.setMenu(null)
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -38,7 +46,8 @@ app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
-    app.quit()
+    // app.quit()
+    win.hide()
   }
 })
 
@@ -53,11 +62,24 @@ app.on('activate', () => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', async () => {
-  if (isDevelopment && !process.env.IS_TEST) {
-    // Install Vue Devtools
-    await installVueDevtools()
-  }
+// app.on('ready', async () => {
+//   const appIcon = new Tray(iconPath)
+//   if (isDevelopment && !process.env.IS_TEST) {
+//     // Install Vue Devtools
+//     await installVueDevtools()
+//   }
+//   createWindow()
+// })
+
+const contextMenu = Menu.buildFromTemplate([
+  { label: 'Open', type: 'normal', click: () => { createWindow() } },
+  { label: 'Quit', type: 'normal', role: 'quit' }
+])
+
+app.on('ready', () => {
+  appIcon = new Tray(iconPath)
+  appIcon.setContextMenu(contextMenu)
+  installVueDevtools()
   createWindow()
 })
 
