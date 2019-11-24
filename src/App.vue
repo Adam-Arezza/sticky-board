@@ -27,6 +27,7 @@
 import InputHeader from "./components/InputHeader";
 import StickyBoard from "./components/StickyBoard";
 import Boards from "./components/Boards";
+import { ipcRenderer } from "electron";
 
 export default {
   components: { InputHeader, StickyBoard, Boards },
@@ -111,11 +112,8 @@ export default {
       });
     },
     backToBoards() {
-      this.selectedBoard = undefined
+      this.selectedBoard = undefined;
     }
-  },
-  created() {
-    // this.loadStickies();
   },
   computed: {
     getBoards() {
