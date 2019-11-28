@@ -20,13 +20,16 @@ if (process.platform === "linux") {
   console.log('it is linux')
   iconPath = '/home/adam/Documents/sticky-board/src/assets/gear_icon.png'
 }
+else {
+  iconPath = 'src/assets/gear_icon.png'
+}
 
 // Standard scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], { secure: true })
 
 function createWindow() {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600 })
+  win = new BrowserWindow({ width: 1280, height: 720})
   win.maximize()
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -94,20 +97,22 @@ function openBoard(board) {
     createWindow()
     win.webContents.on('did-finish-load', () => {
       win.webContents.send('openBoard', board)
-      console.log('sending board to renderer: ' + board)
+      // console.log('sending board to renderer: ' + board)
     })
   }
 }
 
 ipcMain.on('boardList', (event, arg) => {
-  boards = arg
-  let trayLabels = contextMenu.items.map(item => item.label)
-  let boardLabels = boards.map(board => board.board)
-  boardLabels.forEach(label => {
-    if (!trayLabels.includes(label)) {
-      let trayItem = new MenuItem({ label: label, type: 'normal', click: () => { openBoard(label) } })
-      contextMenu.append(trayItem)
-    }
-  })
-  appIcon.setContextMenu(contextMenu)
+  if(arg) {
+    boards = arg
+    let trayLabels = contextMenu.items.map(item => item.label)
+    let boardLabels = boards.map(board => board.board)
+    boardLabels.forEach(label => {
+      if (!trayLabels.includes(label)) {
+        let trayItem = new MenuItem({ label: label, type: 'normal', click: () => { openBoard(label) } })
+        contextMenu.append(trayItem)
+      }
+    })
+    appIcon.setContextMenu(contextMenu)
+  }
 })

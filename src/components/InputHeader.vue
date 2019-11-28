@@ -12,16 +12,18 @@
       <Progress v-bind:stickies="stickies" v-bind:columns="columns"></Progress>
     </div>
     <button class="actionBtn" @click="backToBoards">Back to boards</button>
-    <div class="date" v-bind="currentDate">
-      {{currentDate}}
+    <div class="date">{{currentDate}}
+      <Warnings v-bind:stickies="stickies"></Warnings>
     </div>
   </div>
 </template>
 
 <script>
 import Progress from "./Progress";
+import Warnings from './Warnings'
+
 export default {
-  components: { Progress },
+  components: { Progress, Warnings },
   props: ["stickies", "columns"],
   data() {
     return {
@@ -35,18 +37,28 @@ export default {
         return alert("please input the task due date");
       }
       let date = new Date();
-      this.$emit("createSticky", this.task, date, this.dueDate);
+      let month = date.getMonth();
+      date = date
+        .toString()
+        .split(" ")
+        .slice(1, 4);
+      let formatDate = [date[2], month, date[1]].join("-");
+      this.$emit("createSticky", this.task, formatDate, this.dueDate);
       this.task = "";
       this.created = "";
       this.dueDate = undefined;
     },
     backToBoards() {
-      this.$emit("backToBoards")
+      this.$emit("backToBoards");
     }
   },
   computed: {
     currentDate() {
-      return new Date()
+      let date = new Date().toString();
+      let formatDate = date.split(" ").slice(0, 4);
+      // console.log(formatDate)
+      formatDate = formatDate.join(" ");
+      return formatDate;
     }
   }
 };
@@ -74,7 +86,7 @@ export default {
   display: block;
   border-radius: 5px;
 }
-.createBtn:hover {
+.actionBtn:hover {
   cursor: pointer;
   background: rgb(50, 50, 100);
 }

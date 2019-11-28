@@ -86,12 +86,13 @@ export default {
         return localStorage.setItem("boardData", JSON.stringify(savedData));
       }
     },
-    loadStickies() {
-      if (localStorage.getItem("boardData")) {
-        let stickies = JSON.parse(localStorage.getItem("boardData"));
-        this.stickies = stickies;
-      }
-    },
+    // ,
+    // loadStickies() {
+    //   if (localStorage.getItem("boardData")) {
+    //     let stickies = JSON.parse(localStorage.getItem("boardData"));
+    //     this.stickies = stickies;
+    //   }
+    // },
     deleteNote(id) {
       let note = this.stickies.findIndex(sticky => sticky.stickyId == id);
       this.stickies.splice(note, 1);
@@ -102,7 +103,7 @@ export default {
       this.saveStickies();
     },
     loadBoard(board) {
-      console.log(typeof(board))
+      // console.log(typeof(board))
       let boardName;
       if (typeof(board) == 'string') {
         boardName = board
@@ -119,8 +120,12 @@ export default {
     },
     backToBoards() {
       this.selectedBoard = undefined;
-    }
-  },
+    },
+    // getBoards() {
+    //   this.boards = JSON.parse(localStorage.getItem("boardData"));
+    // }
+  }
+  ,
   computed: {
     getBoards() {
       let boards = JSON.parse(localStorage.getItem("boardData"));
@@ -130,6 +135,8 @@ export default {
   },
   created() {
     ipcRenderer.send("boardList", this.getBoards);
+  },
+  mounted() {
     ipcRenderer.on("openBoard", (event, msg) => {
       this.loadBoard(msg);
     });
