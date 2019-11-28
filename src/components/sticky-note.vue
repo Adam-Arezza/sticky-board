@@ -6,8 +6,8 @@
     @dragstart="startDrag"
     @dragover.stop
   >
-    <p>{{note.content}}</p>
-    <button @click="deleteNote(note.stickyId)">Delete</button>
+    <p class="content">{{note.content}}</p>
+    <button class="delete" @click="deleteNote(note.stickyId)">Delete</button>
     <p class="date">
       <strong>Created date:</strong>
       {{note.date}}
@@ -46,8 +46,22 @@ export default {
   box-shadow: 4px 4px 2px grey;
   text-align: left;
   padding: 10px;
+  border: solid lightgray 1px;
 }
 .date {
   font-size: 0.75em;
+}
+.content {
+  word-wrap: break-word;
+}
+.delete {
+  border: none;
+  border-radius: 15px;
+  background: lightslategray;
+  color: white;
+  font-size: 1.2em;
+}
+.delete:hover {
+  cursor: pointer;
 }
 </style>

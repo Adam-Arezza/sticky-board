@@ -102,7 +102,13 @@ export default {
       this.saveStickies();
     },
     loadBoard(board) {
-      let boardName = board.board;
+      console.log(typeof(board))
+      let boardName;
+      if (typeof(board) == 'string') {
+        boardName = board
+      } else {
+        boardName = board.board;
+      }
       let boardData = JSON.parse(localStorage.getItem("boardData"));
       let loadBoard = boardData.find(board => {
         if (board.board == boardName) {
@@ -121,6 +127,12 @@ export default {
       // console.log(boards);
       return boards;
     }
+  },
+  created() {
+    ipcRenderer.send("boardList", this.getBoards);
+    ipcRenderer.on("openBoard", (event, msg) => {
+      this.loadBoard(msg);
+    });
   }
 };
 </script>
