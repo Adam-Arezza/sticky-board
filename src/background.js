@@ -5,7 +5,7 @@ import {
   createProtocol,
   installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib'
-const path = require('path')
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -14,17 +14,20 @@ let win
 let iconPath
 let appIcon
 let notifications
+var boards
 
 if (process.platform === "linux") {
   console.log('it is linux')
   iconPath = '/home/adam/Documents/sticky-board/src/assets/gear_icon.png'
 }
+
 // Standard scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], { secure: true })
+
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({ width: 800, height: 600 })
-  // win.setMenu(null)
+  win.maximize()
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -59,21 +62,9 @@ app.on('activate', () => {
   }
 })
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-// app.on('ready', async () => {
-//   const appIcon = new Tray(iconPath)
-//   if (isDevelopment && !process.env.IS_TEST) {
-//     // Install Vue Devtools
-//     await installVueDevtools()
-//   }
-//   createWindow()
-// })
-
-const contextMenu = Menu.buildFromTemplate([
-  { label: 'Open', type: 'normal', click: () => { createWindow() } },
-  { label: 'Quit', type: 'normal', role: 'quit' }
+let contextMenu = Menu.buildFromTemplate([
+  { label: 'open', type: 'normal', click: () => { createWindow() } },
+  { label: 'quit', type: 'normal', role: 'quit' }
 ])
 
 app.on('ready', () => {
@@ -97,3 +88,26 @@ if (isDevelopment) {
     })
   }
 }
+
+function openBoard(board) {
+  if (!win) {
+    createWindow()
+    win.webContents.on('did-finish-load', () => {
+      win.webContents.send('openBoard', board)
+      console.log('sending board to renderer: ' + board)
+    })
+  }
+}
+
+ipcMain.on('boardList', (event, arg) => {
+  boards = arg
+  let trayLabels = contextMenu.items.map(item => item.label)
+  let boardLabels = boards.map(board => board.board)
+  boardLabels.forEach(label => {
+    if (!trayLabels.includes(label)) {
+      let trayItem = new MenuItem({ label: label, type: 'normal', click: () => { openBoard(label) } })
+      contextMenu.append(trayItem)
+    }
+  })
+  appIcon.setContextMenu(contextMenu)
+})
