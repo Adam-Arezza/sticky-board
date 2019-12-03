@@ -13,7 +13,7 @@ export default {
   data() {
     return {
       percent: 0
-    }
+    };
   },
   computed: {
     percentComplete() {
@@ -28,15 +28,15 @@ export default {
       if (completeTasks < total && completed[0] != undefined) {
         //console.log("some amount is completed");
         const percentage = (completeTasks / total).toPrecision(2);
-        this.percent = percentage * 100
+        this.percent = percentage * 100;
         return percentage * 100 + "%";
       }
       if (completeTasks == total && completed[0] != undefined) {
         const percentage = (completeTasks / total).toPrecision(2);
-        this.percent = percentage * 100
+        this.percent = percentage * 100;
         return percentage * 100 + "%";
       } else {
-        this.percent = 0
+        this.percent = 0;
         return 0 + "%";
       }
     }

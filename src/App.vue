@@ -1,11 +1,6 @@
 <template>
   <div id="app">
-    <Boards
-      v-if="!selectedBoard"
-      v-bind:boards="getBoards"
-      v-on:newBoard="newBoard"
-      v-on:chooseBoard="loadBoard"
-    ></Boards>
+    <Boards v-if="!selectedBoard" v-on:newBoard="newBoard" v-on:chooseBoard="loadBoard"></Boards>
     <InputHeader
       v-if="selectedBoard"
       v-on:createSticky="createSticky"
@@ -27,7 +22,6 @@
 import InputHeader from "./components/InputHeader";
 import StickyBoard from "./components/StickyBoard";
 import Boards from "./components/Boards";
-import { ipcRenderer } from "electron";
 
 export default {
   components: { InputHeader, StickyBoard, Boards },
@@ -86,12 +80,6 @@ export default {
         return localStorage.setItem("boardData", JSON.stringify(savedData));
       }
     },
-    loadStickies() {
-      if (localStorage.getItem("boardData")) {
-        let stickies = JSON.parse(localStorage.getItem("boardData"));
-        this.stickies = stickies;
-      }
-    },
     deleteNote(id) {
       let note = this.stickies.findIndex(sticky => sticky.stickyId == id);
       this.stickies.splice(note, 1);
@@ -99,40 +87,17 @@ export default {
     },
     newBoard(board) {
       this.selectedBoard = board;
+      this.stickies = [];
       this.saveStickies();
     },
     loadBoard(board) {
-      console.log(typeof(board))
-      let boardName;
-      if (typeof(board) == 'string') {
-        boardName = board
-      } else {
-        boardName = board.board;
-      }
-      let boardData = JSON.parse(localStorage.getItem("boardData"));
-      let loadBoard = boardData.find(board => {
-        if (board.board == boardName) {
-          this.stickies = board.stickies;
-          this.selectedBoard = board.board;
-        }
-      });
+      this.stickies = board.stickies;
+      this.selectedBoard = board.board;
+      this.count = board.stickies.length;
     },
     backToBoards() {
       this.selectedBoard = undefined;
     }
-  },
-  computed: {
-    getBoards() {
-      let boards = JSON.parse(localStorage.getItem("boardData"));
-      // console.log(boards);
-      return boards;
-    }
-  },
-  created() {
-    ipcRenderer.send("boardList", this.getBoards);
-    ipcRenderer.on("openBoard", (event, msg) => {
-      this.loadBoard(msg);
-    });
   }
 };
 </script>
