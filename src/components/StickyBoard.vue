@@ -31,10 +31,10 @@ export default {
       return notes;
     },
     deleteNote(id) {
-      this.$emit('delete', id)
+      this.$emit("delete", id);
     },
     transferSticky(data, col) {
-      this.$emit('transfer', data, col)
+      this.$emit("transfer", data, col);
     }
   }
 };

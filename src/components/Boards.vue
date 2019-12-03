@@ -10,13 +10,14 @@
 
 <script>
 import BoardList from "./BoardList";
+import { ipcRenderer } from "electron";
 
 export default {
   components: { BoardList },
-  props: ["boards"],
   data() {
     return {
-      boardName: undefined
+      boardName: undefined,
+      boards: []
     };
   },
   methods: {
@@ -28,7 +29,24 @@ export default {
       }
     },
     chooseBoard(board) {
-        this.$emit('chooseBoard', board)
+      this.$emit("chooseBoard", board);
+    },
+    sendBoards() {
+      ipcRenderer.send("boardList", this.boards);
+    }
+  },
+  mounted() {
+    this.boards = JSON.parse(localStorage.getItem("boardData"));
+    ipcRenderer.on("openBoard", (event, msg) => {
+      let board = this.boards.find(board => board.board == msg);
+      this.chooseBoard(board);
+    });
+  },
+  watch: {
+    boards: function(oldBoards, newBoards) {
+      if (oldBoards != newBoards) {
+        this.sendBoards();
+      }
     }
   }
 };

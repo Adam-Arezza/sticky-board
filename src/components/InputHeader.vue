@@ -12,7 +12,8 @@
       <Progress v-bind:stickies="stickies" v-bind:columns="columns"></Progress>
     </div>
     <button class="actionBtn" @click="backToBoards">Back to boards</button>
-    <div class="date">{{currentDate}}
+    <div class="date">
+      {{currentDate}}
       <Warnings v-bind:stickies="stickies"></Warnings>
     </div>
   </div>
@@ -20,7 +21,7 @@
 
 <script>
 import Progress from "./Progress";
-import Warnings from './Warnings'
+import Warnings from "./Warnings";
 
 export default {
   components: { Progress, Warnings },
