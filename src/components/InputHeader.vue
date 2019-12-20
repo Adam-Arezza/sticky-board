@@ -2,16 +2,18 @@
   <div class="inputs">
     <div>
       <textarea class="stickyInput" placeholder="Enter task" v-model="task" />
-      <button class="actionBtn" @click="createSticky">Create</button>
     </div>
     <div class="details">
       <div>
-        <label for="due=date">Due:</label>
+        <label class="date-label" for="due-date">Due:</label>
         <input id="due-date" class="detail" type="date" v-model="dueDate" />
+        <button class="actionBtn" @click="createSticky">Create Note</button>
+        <Progress v-bind:stickies="stickies" v-bind:columns="columns"></Progress>
       </div>
-      <Progress v-bind:stickies="stickies" v-bind:columns="columns"></Progress>
     </div>
-    <button class="actionBtn" @click="backToBoards">Back to boards</button>
+    <div>
+      <button class="actionBtn" @click="backToBoards">Back to boards</button>
+    </div>
     <div class="date">
       {{currentDate}}
       <Warnings v-bind:stickies="stickies"></Warnings>
@@ -74,22 +76,22 @@ export default {
   padding: 15px;
 }
 .stickyInput {
-  min-width: 300px;
-  max-width: 400px;
-  min-height: 50px;
-  max-height: 175px;
+  width: 350px;
+  height: 175px;
+  resize: none;
+  overflow-y: scroll;
 }
 .actionBtn {
-  background: darkblue;
-  color: white;
   border: none;
+  margin: 5px;
   font-size: 1.2em;
-  display: block;
-  border-radius: 5px;
+  padding: 5px;
+  border-radius: 20px;
+  border: solid purple 1px;
 }
 .actionBtn:hover {
   cursor: pointer;
-  background: rgb(50, 50, 100);
+  background: rgb(227, 213, 243);
 }
 .details {
   display: flex;
@@ -99,9 +101,13 @@ export default {
 .detail {
   margin-left: 2px;
   margin-bottom: 3px;
-  width: 150px;
+  font-size: 1.5em;
+  border-radius: 10px;
 }
 .date {
   font-size: 1em;
+}
+.date-label {
+  font-size: 1.3em;
 }
 </style>

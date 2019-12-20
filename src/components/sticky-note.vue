@@ -48,6 +48,9 @@ export default {
   padding: 10px;
   border: solid lightgray 1px;
 }
+.note:hover{
+  cursor: grabbing;
+}
 .date {
   font-size: 0.75em;
 }
@@ -56,10 +59,11 @@ export default {
 }
 .delete {
   border: none;
-  border-radius: 15px;
-  background: lightslategray;
-  color: white;
-  font-size: 1.2em;
+  margin: 5px;
+  font-size: 1em;
+  padding: 5px;
+  border-radius: 20px;
+  border: solid purple 1px;
 }
 .delete:hover {
   cursor: pointer;
