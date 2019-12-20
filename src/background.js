@@ -107,6 +107,7 @@ ipcMain.on('boardList', (event, arg) => {
     boards = arg
     let trayLabels = contextMenu.items.map(item => item.label)
     let boardLabels = boards.map(board => board.board)
+    //need to remove boards from the list when a board gets deleted
     boardLabels.forEach(label => {
       if (!trayLabels.includes(label)) {
         let trayItem = new MenuItem({ label: label, type: 'normal', click: () => { openBoard(label) } })

@@ -4,7 +4,12 @@
       <input class="boardname" placeholder="board name" type="text" v-model="boardName" />
       <button class="createBtn" @click="newBoard">Start new board</button>
     </div>
-    <BoardList v-bind:boards="boards" v-on:chooseBoard="chooseBoard"></BoardList>
+    <BoardList
+      v-bind:boards="boards"
+      v-on:chooseBoard="chooseBoard"
+      v-on:deleteBoard="deleteBoard"
+      v-on:archiveBoard="archiveBoard"
+    ></BoardList>
   </div>
 </template>
 
@@ -33,6 +38,16 @@ export default {
     },
     sendBoards() {
       ipcRenderer.send("boardList", this.boards);
+    },
+    deleteBoard(board) {
+      let boards = JSON.parse(localStorage.getItem("boardData"))
+      let filteredBoards = boards.filter(b => b.board != board.board)
+      localStorage.setItem('boardData', JSON.stringify(filteredBoards))
+      this.boards = filteredBoards
+    },
+    archiveBoard(board) {
+      localStorage.setItem("archives", JSON.stringify(board))
+      this.deleteBoard(board)
     }
   },
   mounted() {
@@ -44,7 +59,10 @@ export default {
   },
   watch: {
     boards: function(oldBoards, newBoards) {
+      // console.log(oldBoards)
+      // console.log(newBoards)
       if (oldBoards != newBoards) {
+        console.log("sending boards")
         this.sendBoards();
       }
     }
@@ -56,18 +74,21 @@ export default {
 .boards {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 20px;
+  background-image: linear-gradient(to bottom right, rgb(236, 241, 243), rgb(140, 164, 172));
+  min-height: 100vh;
 }
 .createBtn {
-  background: darkblue;
+  background: rgb(79, 94, 134);
   color: white;
   border: none;
-  font-size: 1.2em;
-  display: block;
+  font-size: 1.5em;
+  padding: 15px;
+  /* display: block; */
   margin: 3px;
-  border-radius: 5px;
+  border-radius: 50px;
 }
 .createBtn:hover {
   cursor: pointer;
