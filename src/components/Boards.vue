@@ -77,8 +77,6 @@ export default {
   justify-content: flex-start;
   align-items: center;
   padding: 20px;
-  background-image: linear-gradient(to bottom right, rgb(236, 241, 243), rgb(140, 164, 172));
-  min-height: 100vh;
 }
 .createBtn {
   background: rgb(79, 94, 134);
@@ -97,7 +95,11 @@ export default {
 .boardname {
   font-size: 2em;
   margin: 5px;
+  padding: 10px;
   width: 100%;
+  border-radius: 30px;
+  border: none;
+  outline: none;
 }
 .newboard {
   display: flex;

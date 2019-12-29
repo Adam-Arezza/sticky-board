@@ -45,7 +45,13 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  flex-wrap: wrap;
-  height: 75vh;
+  /* flex-wrap: wrap; */
+  min-height: 75vh;
+  max-height: 75vh;
 }
+@media only screen and (max-width: 500px){
+  .board{
+    flex-direction: column;
+  }
+} 
 </style>

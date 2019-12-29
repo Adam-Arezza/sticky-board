@@ -6,7 +6,8 @@
     @dragstart="startDrag"
     @dragover.stop
   >
-    <p class="content">{{note.content}}</p>
+    <h2>{{note.header}}</h2>
+    <p v-for="(item, index) in note.content" class="content" :key="index">{{item}}</p>
     <button class="delete" @click="deleteNote(note.stickyId)">Delete</button>
     <p class="date">
       <strong>Created date:</strong>
@@ -31,6 +32,16 @@ export default {
     deleteNote(id) {
       this.$emit("delete", id);
     }
+  },
+  beforeMount() {
+    let items = this.note.content;
+    try{
+    items = items.split("\n");
+    this.note.content = items;
+    }
+    catch(err){
+      console.log(err)
+    }
   }
 };
 </script>
@@ -48,7 +59,7 @@ export default {
   padding: 10px;
   border: solid lightgray 1px;
 }
-.note:hover{
+.note:hover {
   cursor: grabbing;
 }
 .date {
@@ -63,9 +74,10 @@ export default {
   font-size: 1em;
   padding: 5px;
   border-radius: 20px;
-  border: solid purple 1px;
+  border: solid rgb(0, 30, 128) 2px;
 }
 .delete:hover {
   cursor: pointer;
+  background: rgb(178, 174, 245);
 }
 </style>

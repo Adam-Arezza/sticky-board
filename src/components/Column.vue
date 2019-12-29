@@ -55,7 +55,7 @@ export default {
 .column {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 28%;
   margin: 15px;
   border: grey solid 2px;
   text-align: center;
@@ -64,6 +64,12 @@ export default {
   overflow-y: scroll;
   background: white;
 }
+@media only screen and (max-width: 500px){
+  .column{
+    min-width: 90%;
+    min-height: 30%;
+  }
+} 
 /* width */
 .column::-webkit-scrollbar {
   width: 15px;
@@ -80,7 +86,7 @@ export default {
 
 /* Handle */
 .column::-webkit-scrollbar-thumb {
-  background: rgb(32, 32, 32);
+  background: rgb(78, 119, 196);
   border-radius: 10px;
 }
 
