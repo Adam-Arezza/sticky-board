@@ -34,9 +34,10 @@ export default {
     };
   },
   methods: {
-    createSticky(content, date, due) {
+    createSticky(header, content, date, due) {
       this.stickies.push({
         stickyId: "S" + (this.count + 1),
+        header: header,
         content: content,
         column: "Tasks",
         date: date,
@@ -105,10 +106,15 @@ export default {
 <style>
 body {
   margin: 0px;
+
 }
 #app {
+  /* min-height: 100vh; */
   min-height: 100vh;
+  max-height: 100vh;
   background: rgb(200, 200, 200);
   font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to top right,rgb(250,250,250), rgb(100, 150, 200));
+
 }
 </style>

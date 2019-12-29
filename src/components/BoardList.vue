@@ -67,13 +67,13 @@ p {
   font-size: 1em;
   padding: 5px;
   border-radius: 20px;
-  border: solid purple 1px;
+  border: solid rgb(0, 30, 128) 2px;
 }
 .boardBtn:focus {
   outline: none;
 }
 .boardBtn:hover {
   cursor: pointer;
-  background: rgb(227, 213, 243);
+  background: rgb(178, 174, 245);
 }
 </style>

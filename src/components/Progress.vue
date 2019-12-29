@@ -56,4 +56,15 @@ export default {
 .increment {
   background: lightgreen;
 }
+.progress {
+  /* min-width: 425px;
+  max-width: 425px; */
+  width: 425px;
+}
+
+@media only screen and (max-width: 500px){
+  .progress{
+    width: 90%;
+  }
+} 
 </style>
