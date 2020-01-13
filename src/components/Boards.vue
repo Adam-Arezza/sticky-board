@@ -79,25 +79,25 @@ export default {
   padding: 20px;
 }
 .createBtn {
-  background: rgb(79, 94, 134);
+  background: rgb(50,50,100);
   color: white;
   border: none;
   font-size: 1.5em;
   padding: 15px;
   /* display: block; */
   margin: 3px;
-  border-radius: 50px;
+  border-radius: 5px;
 }
 .createBtn:hover {
   cursor: pointer;
-  background: rgb(50, 50, 100);
+  background: rgb(114, 107, 247);
 }
 .boardname {
   font-size: 2em;
   margin: 5px;
   padding: 10px;
   width: 100%;
-  border-radius: 30px;
+  border-radius: 5px;
   border: none;
   outline: none;
 }

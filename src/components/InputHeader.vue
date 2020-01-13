@@ -93,23 +93,29 @@ export default {
   }
 }
 
+.stickyHeader {
+  font-size: 1.1em;
+}
+
 .stickyInput {
   width: 350px;
   height: 175px;
   resize: none;
   overflow-y: scroll;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1em;
 }
 .actionBtn {
   border: none;
   margin: 5px;
   font-size: 1em;
   padding: 5px;
-  border-radius: 20px;
-  border: solid rgb(0, 30, 128) 2px;
+  background: rgb(50,50,100);
+  color: white;
 }
 .actionBtn:hover {
   cursor: pointer;
-  background: rgb(178, 174, 245);
+  background: rgb(114, 107, 247);
 }
 .details {
   display: flex;
@@ -120,7 +126,6 @@ export default {
   margin-left: 2px;
   margin-bottom: 3px;
   font-size: 1.5em;
-  border-radius: 10px;
 }
 .date {
   font-size: 1em;

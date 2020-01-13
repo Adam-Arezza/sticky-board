@@ -5,7 +5,7 @@
     @dragleave.prevent="dragLeave"
     @drop.prevent="dropItem"
   >
-    <h1>{{name}}</h1>
+    <h1 class="header">{{name}}</h1>
     <StickyNote
       v-for="(sticky, index) in stickies"
       :key="index"
@@ -58,10 +58,9 @@ export default {
   width: 28%;
   margin: 15px;
   border: grey solid 2px;
-  text-align: center;
-  border-radius: 15px;
   align-items: center;
   overflow-y: scroll;
+  overflow-x: hidden;
   background: white;
 }
 @media only screen and (max-width: 500px){
@@ -72,27 +71,35 @@ export default {
 } 
 /* width */
 .column::-webkit-scrollbar {
-  width: 15px;
-  border-radius: 15px;
+  width: 10px;
+  display: block;
 }
 
 /* Track */
 .column::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 15px;
-  max-height: 30px;
   display: none;
 }
 
 /* Handle */
 .column::-webkit-scrollbar-thumb {
   background: rgb(78, 119, 196);
-  border-radius: 10px;
 }
 
 /* Handle on hover */
 .column::-webkit-scrollbar-thumb:hover {
   background: #555;
   width: 15px;
+}
+
+.header {
+  position: sticky;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: white;
+  top: 0;
+  width: 100%;
 }
 </style>

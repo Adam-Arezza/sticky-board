@@ -54,16 +54,20 @@ export default {
   /* max-height: 300px;
   min-height: 10%; */
   margin: 15px;
-  box-shadow: 4px 4px 2px grey;
   text-align: left;
   padding: 10px;
   border: solid lightgray 1px;
 }
 .note:hover {
   cursor: grabbing;
+  box-shadow: 4px 4px 2px grey;
 }
 .date {
   font-size: 0.75em;
+  background: lightgrey;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 5px;
 }
 .content {
   word-wrap: break-word;
@@ -73,11 +77,11 @@ export default {
   margin: 5px;
   font-size: 1em;
   padding: 5px;
-  border-radius: 20px;
-  border: solid rgb(0, 30, 128) 2px;
+  background: rgb(50,50,100);
+  color: white;
 }
 .delete:hover {
   cursor: pointer;
-  background: rgb(178, 174, 245);
+  background: rgb(114, 107, 247);
 }
 </style>

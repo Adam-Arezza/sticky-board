@@ -40,7 +40,8 @@ export default {
 p {
   margin: 0px;
   padding: 5px;
-  border-radius: 5px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
   align-self: center;
   background: rgb(229, 231, 240);
   color: black;
@@ -66,14 +67,14 @@ p {
   margin: 5px;
   font-size: 1em;
   padding: 5px;
-  border-radius: 20px;
-  border: solid rgb(0, 30, 128) 2px;
+  background: rgb(50,50,100);
+  color: white;
 }
 .boardBtn:focus {
   outline: none;
 }
 .boardBtn:hover {
   cursor: pointer;
-  background: rgb(178, 174, 245);
+  background: rgb(114, 107, 247);
 }
 </style>
