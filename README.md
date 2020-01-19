@@ -1,4 +1,6 @@
 # vue-electron-stickyboard
+This is a minimal project board application built with Vue.js and Electron. It saves the app data in local storage.
+Tasks can be added to the task board and dragged over to the other columns as needed. A task passed it's due date will show a warning to the user.
 
 ## Project setup
 ```
