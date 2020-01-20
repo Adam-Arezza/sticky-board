@@ -106,7 +106,6 @@ export default {
 <style>
 body {
   margin: 0px;
-
 }
 #app {
   /* min-height: 100vh; */
@@ -114,7 +113,6 @@ body {
   max-height: 100vh;
   background: rgb(200, 200, 200);
   font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(to top right,rgb(250,250,250), rgb(100, 150, 200));
-
+  background: rgb(38, 36, 43);
 }
 </style>

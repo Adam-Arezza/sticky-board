@@ -8,8 +8,8 @@
           <strong>Column:</strong>
           {{sticky.column}}
           <br />
-          <strong>Task:</strong>
-          {{sticky.content}}
+          <strong>Label:</strong>
+          {{sticky.header}}
           <br />
           <strong>Days late:</strong>
           {{sticky.late}}
@@ -56,7 +56,7 @@ export default {
   border-bottom: solid 2px;
 }
 span {
-  color: black;
+  color: lightgray;
 }
 
 .warningList {
@@ -68,7 +68,6 @@ span {
   background: rgb(224, 224, 222);
   padding: 15px;
   border: solid black 1px;
-  border-radius: 15px;
   color: black;
 }
 ul {

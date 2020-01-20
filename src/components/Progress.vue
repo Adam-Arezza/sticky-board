@@ -1,6 +1,6 @@
 <template>
   <div class="progress">
-    <strong>{{percentComplete}} completed</strong>
+    <strong class="percentage">{{percentComplete}} completed</strong>
     <div class="progress-bar" ref="p-bar">
       <div class="increment" v-for="(percent, index) in percent" :key="index">|</div>
     </div>
@@ -60,6 +60,10 @@ export default {
   /* min-width: 425px;
   max-width: 425px; */
   width: 425px;
+}
+
+.percentage {
+  color: lightgray;
 }
 
 @media only screen and (max-width: 500px){

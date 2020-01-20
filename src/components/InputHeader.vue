@@ -129,9 +129,12 @@ export default {
 }
 .date {
   font-size: 1em;
+  color: lightgrey;
+  background: transparent;
 }
 .date-label {
   font-size: 1.3em;
+  color: lightgrey;
 }
 .noteContents {
   display: flex;
